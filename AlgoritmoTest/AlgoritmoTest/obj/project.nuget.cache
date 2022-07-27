@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0bDQiirUE90ZJjU18k8lnHljfHmmqFUdMs1q8bjYpebVvEIbb/e+HOHvEFAEOZ8KO7/EACKbQ7dGxSS3DIi4Sg==",
+  "success": true,
+  "projectFilePath": "E:\\Users\\agcruzm\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\AlgoritmoTest.csproj",
+  "expectedPackageFiles": [
+    "E:\\Users\\agcruzm\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.15\\microsoft.netcore.app.host.win-x64.5.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}
