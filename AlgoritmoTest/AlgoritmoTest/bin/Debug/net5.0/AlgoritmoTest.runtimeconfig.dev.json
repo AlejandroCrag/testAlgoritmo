@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "E:\\Users\\agcruzm\\.dotnet\\store\\|arch|\\|tfm|",
+      "E:\\Users\\agcruzm\\.nuget\\packages"
+    ]
+  }
+}

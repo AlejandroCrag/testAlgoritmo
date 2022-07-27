@@ -1,0 +1,16 @@
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\AlgoritmoTest.exe
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\AlgoritmoTest.deps.json
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\AlgoritmoTest.runtimeconfig.json
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\AlgoritmoTest.runtimeconfig.dev.json
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\AlgoritmoTest.dll
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\ref\AlgoritmoTest.dll
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\bin\Debug\net5.0\AlgoritmoTest.pdb
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.csproj.AssemblyReference.cache
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.GeneratedMSBuildEditorConfig.editorconfig
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.AssemblyInfoInputs.cache
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.AssemblyInfo.cs
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.csproj.CoreCompileInputs.cache
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.dll
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\ref\AlgoritmoTest.dll
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.pdb
+E:\Users\agcruzm\source\repos\testAlgoritmo\AlgoritmoTest\AlgoritmoTest\obj\Debug\net5.0\AlgoritmoTest.genruntimeconfig.cache
