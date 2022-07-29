@@ -26,17 +26,15 @@ namespace AlgoritmoTest
         public bool Start()
         {
             GetSubClustersActuales();
-            for (int a = 0; a < TotalElementosFaltantes; a++)
+            for (int a = 0; a < ElementosFaltantesList.Count(); a++)
             {
-                //saveConfiguracion("", "", "");
                 bool resultado = ElemFaltantesvsSubClusters(ElementosFaltantesList[a]);
-
                 if (resultado)
                 {
-                    //saveConfiguracion("", "", "");
                     return true;
                 }
             }
+
             //Status Incrementa en 1=> 
             //Siguiente Paso es comparar FaltantesVsFaltantes
             //O Escribir los Resultados
@@ -87,11 +85,15 @@ namespace AlgoritmoTest
             var agregado = false;
             if (cliente==0) {
                 //Posiblemente en el proceso de FaltanteVsFaltante los SubCluster No existan
-
+                
+                agregado = true;
                 if (StatusProceso == 2)
                 {
                     //Revisar si el clouster existe
                     // getIdIfExist(SubClusterActuales);
+                }
+                else {
+                    obtenerSub.Clientes.Add(clienteAgregar);
                 }
                 //AgregarAlSubCluster
                 //var data = new SubCluster(SubClusterActuales.Count + 1, Clouster_Id, new List<DatosRegistro>());
@@ -137,23 +139,25 @@ namespace AlgoritmoTest
 
         private bool Compara(Clientes cuSub, Clientes cu)
         {
+            Random rd = new Random();
+            int rand_num = rd.Next(0, 100);
+
+
+            if (rand_num < 93) {
+                return false;
+            }
             return true;
         }
 
         private void GetSubClustersActuales()
         {
             //Obtenemos los SubClusters Recibidos de la comparacion
-            if (this.StatusProceso == 1) {
-                SubClusterActuales = new ConsultaSubClusters().ListadoSubClusters();
-                //En Caso de no contar con ningun SubCluster tendremos que avanzar al siguiente status del proceso
-                if (SubClusterActuales.Count() == 0)
-                {
-                    this.StatusProceso = 2;
-                }
+            if (SubClusterActuales.Count() == 0 && this.StatusProceso == 1) {
+                this.StatusProceso = 2;
             }
-            //Si se finalizo la comparacion O No Existen elemento con que comparar
-            //Creamos Elementos a Comparar apartir de los mismo elementos faltantes
-            if (this.StatusProceso == 2) {
+            
+            if (this.StatusProceso == 2)
+            {
                 ConvertElementosFaltantesToSubClusters();
             }
         }
@@ -178,12 +182,16 @@ namespace AlgoritmoTest
 
         public void LoadConfiguracion()
         {
+            //Leer Archivos Faltantes o En que #de Archivo va
             datosConfiguracion = new Configuracion();
             datosConfiguracion.Ultimo_clouster = 1;
             datosConfiguracion.Ultimo_sub_clouster = 1;
             //datosConfiguracion.UltimoRegistro = new Clientes();
             if (this.StatusProceso==0) {
-                new ConsultaSubClusters().readJsonData();
+                ConsultaSubClusters consultaSub = new ConsultaSubClusters();
+                consultaSub.readJsonData();
+                ElementosFaltantesList = consultaSub.ClientesFaltantes;
+                SubClusterActuales = consultaSub.subClusters;
                 this.StatusProceso = 1;
             }
         }

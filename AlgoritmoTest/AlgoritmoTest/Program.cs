@@ -15,7 +15,7 @@ namespace AlgoritmoTest
 
         private static void Iniciar()
         { 
-            proceso.GetElementosFaltantes();
+            //proceso.GetElementosFaltantes();
              
             var resultado = proceso.Start();
 
@@ -29,9 +29,10 @@ namespace AlgoritmoTest
             }
             else if (proceso.StatusProceso == 3) {
                 //Escribir Resultados
-            }
-            else if (proceso.StatusProceso == 4) { 
+                proceso.StatusProceso = proceso.StatusProceso+1;
                 //Cargar Nuevo Documento
+                Console.WriteLine("Comparacion Finalizada, Leer Nuevo Archivo");
+
             }
         }
     }

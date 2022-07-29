@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 namespace AlgoritmoTest.Models.Tools
 {
     class ConsultaSubClusters
-    { 
+    {
+        internal List<SubClusters> subClusters;
+        public List<Clientes> ClientesFaltantes { get; internal set; }
+
         public List<SubClusters> ListadoSubClusters() {
             var resultadoConsulta = new List<SubClusters>();
             //var data = new SubCluster(0, 1, new List<DatosRegistro>());
@@ -27,19 +30,20 @@ namespace AlgoritmoTest.Models.Tools
             {
                 string json = r.ReadToEnd();
                 var data  = JsonSerializer.Deserialize<Entity.Master>(json);
-
+                var subClusters = new List<SubClusters>();
+                List<Clientes> clientesPendientes = new List<Clientes>();
                 foreach (var subcluster in data.SubClusters) {
                     if (subcluster.Contenedor == "NOMATCH")
                     {
-                        //add to no matches
-                        Console.WriteLine("ARREGLO DE FALTANTES");
+                        clientesPendientes = subcluster.Clientes;
                     }
                     else {
-                        //add to clusters actuales
-                        Console.WriteLine("ARREGLO DE CLUSTERS");
+                        subClusters.Add(subcluster);
                     }
                 }
-                Console.WriteLine("data read");
+
+                this.subClusters = subClusters;
+                this.ClientesFaltantes = clientesPendientes; 
             }
         }
     }

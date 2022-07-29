@@ -14,5 +14,6 @@ namespace AlgoritmoTest.Models
         public int Ultimo_sub_clouster { get; set; }
 
         public Clientes UltimoRegistro { get; set; }
+        
     }
 }
