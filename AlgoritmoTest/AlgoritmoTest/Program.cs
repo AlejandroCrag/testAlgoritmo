@@ -4,31 +4,39 @@ namespace AlgoritmoTest
 {
     class Program
     {
+        public static ProcesoComparacion proceso { get; private set; }
+
         static void Main(string[] args)
         {
-
-            
-            ProcesoComparacion proceso = new ProcesoComparacion();
-            proceso.getCuFaltantes();
-
-            if (proceso.TotalElementos > 0) {
-                init(proceso);
-            }
-             
-
-            ProcesoComparacion proceso2 = new ProcesoComparacion();
-            proceso2.CrearSubClusters = true;
-            init(proceso2);
-            Console.WriteLine("END...");
+            proceso = new ProcesoComparacion();
+            Init();
+            Console.WriteLine("end");
         }
-         
-        private static void init(ProcesoComparacion proceso)
+
+        private static void Init()
         {
-            var resultado = proceso.Start();
-            if(resultado)
-            {
-                init(proceso);
+            if (!proceso.Init) {
+                proceso.Init = true;
             }
-        }       
+
+            proceso.GetElementosFaltantes();
+            proceso.LoadConfiguracion();
+
+            var resultado = proceso.Start();
+            try
+            {
+                Console.WriteLine(proceso.ElementoActual);
+            }
+            catch (StackOverflowException e) {
+                Console.WriteLine(e.Message);
+            }
+            
+            if (resultado)
+            {
+                Init();
+            } else if (proceso.ElementoActual < proceso.TotalElementosFaltantes-1 ) {
+                Init();
+            }
+        }
     }
 }

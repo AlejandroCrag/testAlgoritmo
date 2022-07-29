@@ -1,4 +1,5 @@
 ﻿using AlgoritmoTest.Models;
+using AlgoritmoTest.Models.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,74 +7,51 @@ using System.Linq;
 namespace AlgoritmoTest
 {
     class ProcesoComparacion
-    {        
-        public Boolean CrearSubClusters { get; internal set; }
+    { 
+        public bool CrearSubClusters { get; internal set; }
+
+        public bool Init = false;
+
         public List<DatosRegistro> ElementosFaltantesList { get; set; }
         public List<SubCluster> SubClusterActuales { get; set; }
-        
-        public int TotalElementos { get; set; }
+
+        public int TotalElementosFaltantes { get; set; }
         public int Clouster_Id { get; private set; }
 
         public int SubClusterIdActual;
 
-        internal void getCuFaltantes()
-        {
-            ElementosFaltantesList  = new List<DatosRegistro>();
-            ElementosFaltantesList.Add(new DatosRegistro(1, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(2, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(3, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(4, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(5, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(6, "x", "y"));
-            
-            TotalElementos = ElementosFaltantesList.Count();
-        }
+        public int ElementoActual = 0;
 
+        private Configuracion datosConfiguracion;
 
-        private void RemoverDeFaltantes(DatosRegistro Cu)
+        public bool Start()
         {
-            var remove  =   ElementosFaltantesList.Remove(ElementosFaltantesList.Find(x => x.Id == Cu.Id));
-            if (!remove)
+            CrearSubClusters = true;
+            for (int a = 0; a < TotalElementosFaltantes; a++)
             {
-                Console.WriteLine("ImposibleRemover de la Lista");
-            }
-        }
-
-        private void AgregarAlSubCluster(DatosRegistro Cu, int SubClusId)
-        {
-            if (CrearSubClusters)
-            {
-                var data = new SubCluster(SubClusterActuales.Count + 1, Clouster_Id ,  new List<DatosRegistro>());
-                data.GrupoRegistros.Add(Cu);
-            }
-        }
-
-        public Boolean Start()
-        {
-            for (int a = 0; a < TotalElementos; a++) {
-                Boolean resultado = CUvsSubClusters(ElementosFaltantesList[a]);
+                ElementoActual = a;
+                bool resultado = ElemFaltantesvsSubClusters(ElementosFaltantesList[a]);
 
                 if (resultado)
                 {
+                    //saveConfiguracion("", "", "");
                     return true;
                 }
             }
+            //saveConfiguracion("", "", "");
             return false;
         }
 
-        private Boolean CUvsSubClusters(DatosRegistro Cu)
+        private bool ElemFaltantesvsSubClusters(DatosRegistro Cu)
         {
+            GetSubClustersActuales();
 
-            SubClusterActuales =  getSubClustersActuales();
             SubClusterIdActual = 1;
-            if (SubClusterActuales.Count() == 0 || CrearSubClusters ) {
-                SubClusterIdActual = 0;
-                ConvertElementosFaltantesToSubClusters();
-            }
+            ConvertElementosFaltantesToSubClusters();
 
             foreach (var SCI in SubClusterActuales)
             {
-                if(SubClusterIdActual != 0)
+                if (SubClusterIdActual != 0)
                 {
                     SubClusterIdActual = SCI.Id;
                 }
@@ -84,30 +62,67 @@ namespace AlgoritmoTest
                     return true;
                 }
             }
-
             return false;
-            
         }
 
-        private Boolean ProcesoPermutacion(DatosRegistro cu, SubCluster sCI, int subClusterIdActual)
-        { 
+        internal void GetElementosFaltantes()
+        {
+            ElementosFaltantesList = new List<DatosRegistro>();
+            ElementosFaltantesList.Add(new DatosRegistro(1, "x", "y"));
+            ElementosFaltantesList.Add(new DatosRegistro(2, "x", "y"));
+            ElementosFaltantesList.Add(new DatosRegistro(3, "x", "y"));
+            ElementosFaltantesList.Add(new DatosRegistro(4, "x", "y"));
+            ElementosFaltantesList.Add(new DatosRegistro(5, "x", "y"));
+            ElementosFaltantesList.Add(new DatosRegistro(6, "x", "y"));
+            
+            TotalElementosFaltantes = ElementosFaltantesList.Count();
+        }
+
+
+        private void RemoverDeFaltantes(DatosRegistro Cu)
+        {
+            var remove = ElementosFaltantesList.Remove(ElementosFaltantesList.Find(x => x.Id == Cu.Id));
+            if (!remove)
+            {
+                Console.WriteLine("ImposibleRemover de la Lista");
+            }
+        }
+
+        private void AgregarAlSubCluster(DatosRegistro Cu, int SubClusId)
+        {
+            if (CrearSubClusters)
+            {
+                var data = new SubCluster(SubClusterActuales.Count + 1, Clouster_Id, new List<DatosRegistro>());
+                data.GrupoRegistros.Add(Cu);
+            }
+        }
+        
+        private bool ProcesoPermutacion(DatosRegistro cu, SubCluster sCI, int subClusterIdActual)
+        {
             var elementosEnSubCluster = sCI.GrupoRegistros.Count();
             var newSubClus = new List<DatosRegistro>();
             int coincidencias = 0;
-            foreach(var CuSub in sCI.GrupoRegistros)
+            foreach (var CuSub in sCI.GrupoRegistros)
             {
-                if (CuSub.Id != cu.Id) {
-                    if (Compara(CuSub, cu) || Compara(CuSub, cu)) {
+                if (CuSub.Id != cu.Id)
+                {
+                    if (Compara(CuSub, cu) || Compara(CuSub, cu))
+                    {
                         newSubClus.Add(cu);
                         newSubClus.Add(CuSub);
                         coincidencias++;
                     }
                 }
+                else {
+                    return false;
+                }
             }
 
-            if (coincidencias > (float)(elementosEnSubCluster / 2)) {
-                if (CrearSubClusters){
-                    foreach (var newElement in  newSubClus) {
+            //if (coincidencias > (float)(elementosEnSubCluster / 2)) {
+            if (CrearSubClusters)
+                {
+                    if (CrearSubClusters) {
+                    foreach (var newElement in newSubClus) {
                         AgregarAlSubCluster(newElement, subClusterIdActual);
                         RemoverDeFaltantes(newElement);
                     }
@@ -126,21 +141,47 @@ namespace AlgoritmoTest
             return true;
         }
 
-        private List<SubCluster> getSubClustersActuales()
+        private void GetSubClustersActuales()
         {
-            return new List<SubCluster>();
+            new ConsultaSubClusters().readJsonData();
+            if (!CrearSubClusters)
+            {
+                SubClusterActuales = new ConsultaSubClusters().ListadoSubClusters();
+
+                if (SubClusterActuales.Count() == 0) {
+                    ConvertElementosFaltantesToSubClusters();
+                }
+            } else if (CrearSubClusters)
+            {
+                ConvertElementosFaltantesToSubClusters();
+            }
         }
 
         private void ConvertElementosFaltantesToSubClusters()
         {
             SubClusterActuales = new List<SubCluster>();
             int id = 1;
-            foreach (var CU in ElementosFaltantesList) {
+            foreach (var CU in ElementosFaltantesList)
+            {
                 var data = new SubCluster(id, Clouster_Id, new List<DatosRegistro>());
                 data.GrupoRegistros.Add(CU);
                 SubClusterActuales.Add(data);
                 id++;
             }
+            CrearSubClusters = true;
+        }
+
+        private void SaveConfiguracion(String clouster,String subCluster,String DatosRegistro)
+        { 
+            Console.WriteLine("YYYYYYYYYYYY");
+        }
+
+        public void LoadConfiguracion()
+        {
+            datosConfiguracion = new Configuracion();
+            datosConfiguracion.Ultimo_clouster = 1;
+            datosConfiguracion.Ultimo_sub_clouster = 1;
+            datosConfiguracion.UltimoRegistro = new DatosRegistro(1,"","");
         }
     }
 }
