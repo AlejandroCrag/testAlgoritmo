@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoritmoTest.Models.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,6 @@ namespace AlgoritmoTest.Models
 
         public int Ultimo_sub_clouster { get; set; }
 
-        public DatosRegistro UltimoRegistro { get; set; }
+        public Clientes UltimoRegistro { get; set; }
     }
 }

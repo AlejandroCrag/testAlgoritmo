@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoritmoTest.Models.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace AlgoritmoTest.Models.Tools
 {
     class ConsultaSubClusters
     { 
-        public List<SubCluster> ListadoSubClusters() {
-            var resultadoConsulta = new List<SubCluster>();
+        public List<SubClusters> ListadoSubClusters() {
+            var resultadoConsulta = new List<SubClusters>();
             //var data = new SubCluster(0, 1, new List<DatosRegistro>());
            // resultadoConsulta.Add(data);
             return resultadoConsulta;
@@ -27,7 +28,7 @@ namespace AlgoritmoTest.Models.Tools
                 string json = r.ReadToEnd();
                 var data  = JsonSerializer.Deserialize<Entity.Master>(json);
 
-                foreach (var subcluster in data.Clusters) {
+                foreach (var subcluster in data.SubClusters) {
                     if (subcluster.Contenedor == "NOMATCH")
                     {
                         //add to no matches

@@ -8,6 +8,15 @@ namespace AlgoritmoTest.Models.Entity
 {
     class Clientes
     {
+        public Clientes(int pais, int canal, int sucursal, int folio, List<Fingerprint> fingerprints)
+        {
+            this.Pais = pais;
+            this.Canal = canal;
+            this.Sucursal = sucursal;
+            this.Folio = folio;
+            this.Fingerprints = fingerprints;
+        }
+
         public int Pais {get; set;}
         public int Canal { get; set; }
         public int Sucursal { get; set; }

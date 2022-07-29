@@ -10,7 +10,7 @@ namespace AlgoritmoTest.Models.Entity
     {
         public int MasterId { get; set; }
 
-        public List<Clusters> Clusters { get; set; }
+        public List<SubClusters> SubClusters { get; set; }
 
     }
 }

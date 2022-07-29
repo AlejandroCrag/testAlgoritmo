@@ -1,6 +1,6 @@
 {
   "MasterId": 1,
-  "Clusters": [
+  "SubClusters": [
     {
       "Contenedor": "C1",
       "Clientes": [

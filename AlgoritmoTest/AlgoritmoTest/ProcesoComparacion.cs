@@ -1,4 +1,5 @@
 ﻿using AlgoritmoTest.Models;
+using AlgoritmoTest.Models.Entity;
 using AlgoritmoTest.Models.Tools;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace AlgoritmoTest
         //4 => Buscar nuevo archivo a cargar
         public int StatusProceso = 0;
 
-        public List<DatosRegistro> ElementosFaltantesList { get; set; }
-        public List<SubCluster> SubClusterActuales { get; set; }
+        public List<Clientes> ElementosFaltantesList { get; set; }
+        public List<SubClusters> SubClusterActuales { get; set; }
         public int TotalElementosFaltantes { get; set; }
         public int Clouster_Id { get; private set; } 
 
@@ -43,7 +44,7 @@ namespace AlgoritmoTest
             return false;
         }
 
-        private bool ElemFaltantesvsSubClusters(DatosRegistro ClienteUnico)
+        private bool ElemFaltantesvsSubClusters(Clientes ClienteUnico)
         {
             foreach (var SCI in SubClusterActuales)
             { 
@@ -58,31 +59,31 @@ namespace AlgoritmoTest
 
         internal void GetElementosFaltantes()
         {
-            ElementosFaltantesList = new List<DatosRegistro>();
-            ElementosFaltantesList.Add(new DatosRegistro(1, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(2, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(3, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(4, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(5, "x", "y"));
-            ElementosFaltantesList.Add(new DatosRegistro(6, "x", "y"));
+            ElementosFaltantesList = new List<Clientes>();
+            ElementosFaltantesList.Add(new Clientes(11, 2, 2, 2 , new List<Fingerprint>()));
+            ElementosFaltantesList.Add(new Clientes(12, 2, 2, 21, new List<Fingerprint>()));
+            ElementosFaltantesList.Add(new Clientes(13, 2, 2, 22, new List<Fingerprint>()));
+            ElementosFaltantesList.Add(new Clientes(14, 2, 2, 23, new List<Fingerprint>()));
+            ElementosFaltantesList.Add(new Clientes(15, 2, 2, 24, new List<Fingerprint>()));
+
             TotalElementosFaltantes = ElementosFaltantesList.Count();
         }
 
 
-        private void RemoverDeFaltantes(DatosRegistro Cu)
+        private void RemoverDeFaltantes(Clientes Cu)
         {
-            var remove = ElementosFaltantesList.Remove(ElementosFaltantesList.Find(x => x.Id == Cu.Id));
+            var remove = ElementosFaltantesList.Remove(ElementosFaltantesList.Find(x => x.Folio == Cu.Folio));
             if (!remove)
             {
                 Console.WriteLine("ImposibleRemover de la Lista");
             }
         }
 
-        private void AgregarAlSubCluster(DatosRegistro clienteAgregar, int IdSubCluster)
+        private void AgregarAlSubCluster(Clientes clienteAgregar, int IdSubCluster)
         {
             /*Comprobar si el elemento a agregar no existe dentro del arreglo*/
             var obtenerSub = SubClusterActuales.Find(x => x.Id == IdSubCluster);
-            var cliente = obtenerSub.GrupoRegistros.Count(y=> y.Id == clienteAgregar.Id);
+            var cliente = obtenerSub.Clientes.Count(y=> y.Folio == clienteAgregar.Folio);
             var agregado = false;
             if (cliente==0) {
                 //Posiblemente en el proceso de FaltanteVsFaltante los SubCluster No existan
@@ -101,14 +102,14 @@ namespace AlgoritmoTest
             }
         }
         
-        private bool ProcesoPermutacion(DatosRegistro Cliente, SubCluster subClusterActual)
+        private bool ProcesoPermutacion(Clientes Cliente, SubClusters subClusterActual)
         {
-            var elementosEnSubCluster = subClusterActual.GrupoRegistros.Count();
-            var newSubClus = new List<DatosRegistro>();
+            var elementosEnSubCluster = subClusterActual.Clientes.Count();
+            var newSubClus = new List<Clientes>();
             int coincidencias = 0;
-            foreach (var ClienteSub in subClusterActual.GrupoRegistros)
+            foreach (var ClienteSub in subClusterActual.Clientes)
             {
-                if (ClienteSub.Id != Cliente.Id)
+                if (ClienteSub.Folio != Cliente.Folio)
                 {
                     if (Compara(ClienteSub, Cliente) || Compara(ClienteSub, Cliente))
                     {
@@ -127,14 +128,14 @@ namespace AlgoritmoTest
             if (coincidencias > (float)(elementosEnSubCluster / 2)) {
                 foreach (var newElement in newSubClus)
                 {
-                    AgregarAlSubCluster(newElement, subClusterActual.Clouster_Id);
+                    AgregarAlSubCluster(newElement, subClusterActual.Id);
                 }
                 return true;
             }
             return false;
         }
 
-        private bool Compara(DatosRegistro cuSub, DatosRegistro cu)
+        private bool Compara(Clientes cuSub, Clientes cu)
         {
             return true;
         }
@@ -159,12 +160,12 @@ namespace AlgoritmoTest
 
         private void ConvertElementosFaltantesToSubClusters()
         {
-            SubClusterActuales = new List<SubCluster>();
+            SubClusterActuales = new List<SubClusters>();
             int id = 1;
             foreach (var CU in ElementosFaltantesList)
             {
-                var data = new SubCluster(id, Clouster_Id, new List<DatosRegistro>());
-                data.GrupoRegistros.Add(CU);
+                var data = new SubClusters(id, "FALTANTES", new List<Clientes>());
+                data.Clientes.Add(CU);
                 SubClusterActuales.Add(data);
                 id++;
             } 
@@ -180,7 +181,7 @@ namespace AlgoritmoTest
             datosConfiguracion = new Configuracion();
             datosConfiguracion.Ultimo_clouster = 1;
             datosConfiguracion.Ultimo_sub_clouster = 1;
-            datosConfiguracion.UltimoRegistro = new DatosRegistro(1,"","");
+            //datosConfiguracion.UltimoRegistro = new Clientes();
             if (this.StatusProceso==0) {
                 new ConsultaSubClusters().readJsonData();
                 this.StatusProceso = 1;
