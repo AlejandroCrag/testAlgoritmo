@@ -14,9 +14,7 @@ namespace AlgoritmoTest
         }
 
         private static void Iniciar()
-        { 
-            //proceso.GetElementosFaltantes();
-             
+        {  
             var resultado = proceso.Start();
 
             if (resultado)
