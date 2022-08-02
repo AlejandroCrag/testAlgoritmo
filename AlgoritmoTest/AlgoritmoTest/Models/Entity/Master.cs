@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoritmoTest.Models.Entity
 {
-    class Master
+    public class Master
     {
         public int MasterId { get; set; }
 

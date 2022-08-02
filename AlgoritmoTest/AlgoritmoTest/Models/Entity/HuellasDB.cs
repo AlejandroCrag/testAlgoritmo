@@ -34,40 +34,85 @@ namespace AlgoritmoTest.Models.Entity
         public void CreateTable()
         {
             SQLiteCommand sqlite_cmd;
-            //string CreateTableSubCluster = "CREATE TABLE IF NOT EXISTS SUB_CLUSTER(Col1 VARCHAR(20), Col2 INT)";
-            string CreateTableConfig     = "CREATE TABLE IF NOT EXISTS CONFIGURACION(Id INT, Nombre_Archivo VARCHAR(20), StatusProceso INT,CONSTRAINT constraint_name PRIMARY KEY (Id))";
+
+            
+            
             sqlite_cmd = sqlite_conn.CreateCommand();
-            //sqlite_cmd.CommandText = CreateTableSubCluster;
-            //sqlite_cmd.ExecuteNonQuery();
+
+            string CreateTableSubCluster = "CREATE TABLE IF NOT EXISTS SUB_CLUSTER(Id INT, Estatus VARCHAR(20), Col2 INT)";
+            sqlite_cmd.CommandText = CreateTableSubCluster;
+            sqlite_cmd.ExecuteNonQuery();
+
+            string CreateTableClientes = "CREATE TABLE IF NOT EXISTS CLIENTES(C VARCHAR(20), CINT)";
+            sqlite_cmd.CommandText = CreateTableClientes;
+            sqlite_cmd.ExecuteNonQuery();
+
+            string CreateTableHuellas = "CREATE TABLE IF NOT EXISTS HUELLAS(C VARCHAR(20), CINT)";
+            sqlite_cmd.CommandText = CreateTableHuellas;
+            sqlite_cmd.ExecuteNonQuery();
+
+            string CreateTableConfig = "CREATE TABLE IF NOT EXISTS CONFIGURACION(Id INT, Nombre_Archivo VARCHAR(20), StatusProceso INT,CONSTRAINT constraint_name PRIMARY KEY (Id))";
             sqlite_cmd.CommandText = CreateTableConfig;
             sqlite_cmd.ExecuteNonQuery();
         }
 
 
 
-        //static void InsertSubCluster(SQLiteConnection conn)
-        //{
-        //    SQLiteCommand sqlite_cmd;
-        //    sqlite_cmd = conn.CreateCommand();
-        //    sqlite_cmd.CommandText = "INSERT INTO SampleTable(Col1, Col2) VALUES('Test Text ', 1); ";
-        //    sqlite_cmd.ExecuteNonQuery();
-        //}
+        public void InsertSubCluster(SubClusters data)
+        {
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "INSERT INTO SampleTable(Col1, Col2) VALUES('Test Text ', 1); ";
+            sqlite_cmd.ExecuteNonQuery();
+        }
 
-        //static void ReadData(SQLiteConnection conn)
-        //{
-        //    SQLiteDataReader sqlite_datareader;
-        //    SQLiteCommand sqlite_cmd;
-        //    sqlite_cmd = conn.CreateCommand();
-        //    sqlite_cmd.CommandText = "SELECT * FROM SampleTable";
+        public void InsertClientes(Clientes data)
+        {
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "INSERT INTO SampleTable(Col1, Col2) VALUES('Test Text ', 1); ";
+            sqlite_cmd.ExecuteNonQuery();
+        }
 
-        //    sqlite_datareader = sqlite_cmd.ExecuteReader();
-        //    while (sqlite_datareader.Read())
-        //    {
-        //        string myreader = sqlite_datareader.GetString(0);
-        //        Console.WriteLine(myreader);
-        //    }
-        //    conn.Close();
-        //}
+        public void InsertHuellas(Huellas data)
+        {
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "INSERT INTO SampleTable(Col1, Col2) VALUES('Test Text ', 1); ";
+            sqlite_cmd.ExecuteNonQuery();
+        }
+
+        public void getListaClientesFaltantes(Object data)
+        {
+            SQLiteDataReader sqlite_datareader;
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT * FROM SampleTable";
+
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            while (sqlite_datareader.Read())
+            {
+                string myreader = sqlite_datareader.GetString(0);
+                Console.WriteLine(myreader);
+            }
+            sqlite_conn.Close();
+        }
+
+        public void getListaSubClusters(Object data)
+        {
+            SQLiteDataReader sqlite_datareader;
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT * FROM SampleTable";
+
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+            while (sqlite_datareader.Read())
+            {
+                string myreader = sqlite_datareader.GetString(0);
+                Console.WriteLine(myreader);
+            }
+            sqlite_conn.Close();
+        }
 
         public async void ReadConfiguracion()
         {

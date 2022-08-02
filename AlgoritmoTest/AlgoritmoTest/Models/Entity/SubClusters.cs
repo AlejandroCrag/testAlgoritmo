@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoritmoTest.Models.Entity
 {
-    class SubClusters
+    public class SubClusters
     {
         public SubClusters(int id, int estatus, string contenedor, List<Clientes> clientes)
         {
