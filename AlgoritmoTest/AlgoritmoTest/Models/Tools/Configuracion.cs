@@ -7,9 +7,10 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace AlgoritmoTest.Models
+
+namespace AlgoritmoTest.Models.Tools
 {
-    class Configuracion
+    public class Configuracion
     {
         public string Nombre_Archivo { get; set; }
         public int StatusProceso { get; set; }

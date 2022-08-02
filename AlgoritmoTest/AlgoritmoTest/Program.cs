@@ -1,14 +1,17 @@
-﻿using System;
+﻿using AlgoritmoTest.Models.Entity;
+using System;
 
 namespace AlgoritmoTest
 {
-    class Program
+    class Program 
     {
         public static ProcesoComparacion proceso { get; private set; }
 
         static void Main(string[] args)
         {
             proceso = new ProcesoComparacion();
+
+
             proceso.LoadConfiguracion();
             Iniciar(); 
         }

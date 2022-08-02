@@ -32,12 +32,14 @@ namespace AlgoritmoTest.Models.Tools
                 var data  = JsonSerializer.Deserialize<Entity.Master>(json);
                 var subClusters = new List<SubClusters>();
                 List<Clientes> clientesPendientes = new List<Clientes>();
+                var id = 0;
                 foreach (var subcluster in data.SubClusters) {
                     if (subcluster.Contenedor == "NOMATCH")
                     {
                         clientesPendientes = subcluster.Clientes;
                     }
                     else {
+                        subcluster.Id = id++;
                         subClusters.Add(subcluster);
                     }
                 }

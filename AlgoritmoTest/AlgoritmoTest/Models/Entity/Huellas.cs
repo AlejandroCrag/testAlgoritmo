@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoritmoTest.Models.Entity
 {
-    class Fingerprint
+    public class Huellas
     {
         public String Huella { get; set; }
         public int Consecutivo { get; set; }
