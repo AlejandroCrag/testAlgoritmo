@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "E:\\Users\\agcruzm\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Users\\agcruzm\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\AlgoritmoTest.csproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\AlgoritmoTest.csproj",
       "projectName": "AlgoritmoTest",
-      "projectPath": "E:\\Users\\agcruzm\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\AlgoritmoTest.csproj",
-      "packagesPath": "E:\\Users\\agcruzm\\.nuget\\packages\\",
-      "outputPath": "E:\\Users\\agcruzm\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\obj\\",
+      "projectPath": "C:\\Users\\user\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\AlgoritmoTest.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Source\\Repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "E:\\Users\\agcruzm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -55,18 +55,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.15, 5.0.15]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
