@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace AlgoritmoTest
 {
     class ProcesoComparacion
-    { 
+    {
+        private static HuellasDB huellasDB;
         //sabremos en que parte del proceso se encuentra 
         //0 => Sin Iniciar -> se busca archivo a cargar
         //1 => Proceso AB FaltantesVsSubClusters
@@ -24,8 +25,9 @@ namespace AlgoritmoTest
 
         private Configuracion datosConfiguracion;
         
+
         public bool Start()
-        {
+        { 
             GetSubClustersActuales();
             for (int a = 0; a < ElementosFaltantesList.Count(); a++)
             {
@@ -90,7 +92,7 @@ namespace AlgoritmoTest
                 {
                     int newID = SubClusterGenerados.Count() + 1;
                     List<Clientes> clienteList = new List<Clientes>();
-                    SubClusters nuevoElemento = new SubClusters(newID, "SUB_C_N", clienteList);
+                    SubClusters nuevoElemento = new SubClusters(newID,1, "SUB_C_N", clienteList);
                     SubClusterGenerados.Add(nuevoElemento);
                     subClusterActual.Id = newID;
                 }
@@ -168,7 +170,7 @@ namespace AlgoritmoTest
 
             foreach (var CU in ElementosFaltantesList)
             {
-                var data = new SubClusters(id, "FALTANTES", new List<Clientes>());
+                var data = new SubClusters(id,0, "FALTANTES", new List<Clientes>());
                 data.Clientes.Add(CU);
                 SubClusterActuales.Add(data);
                 id++;
@@ -187,6 +189,9 @@ namespace AlgoritmoTest
         
         public void LoadConfiguracion()
         {
+
+            huellasDB = new HuellasDB(); 
+            //var data = huellasDB.ReadConfiguracion(huellasDB.CreateConnection);
             //Leer Archivos Faltantes o En que #de Archivo va
             datosConfiguracion = new Configuracion().LeerConfiguracion();
             if (datosConfiguracion.StatusProceso != 0) {

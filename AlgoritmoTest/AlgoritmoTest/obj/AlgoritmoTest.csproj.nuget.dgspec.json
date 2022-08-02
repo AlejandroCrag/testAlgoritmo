@@ -11,7 +11,7 @@
         "projectName": "AlgoritmoTest",
         "projectPath": "C:\\Users\\user\\Source\\Repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\AlgoritmoTest.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\obj\\",
+        "outputPath": "C:\\Users\\user\\Source\\Repos\\testAlgoritmo\\AlgoritmoTest\\AlgoritmoTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.116, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
